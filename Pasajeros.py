@@ -10,5 +10,12 @@ class pasajeros(persones):
 
         self.vip = vip
         self.necesidades = necesidades
-
-        
+    def EJ_1(self):
+        diccionario={'Nombre':self.Nombre,
+                     'Apellido':self.Apellido,
+                     'Fecha_nac':self.Fecha_nac,
+                     'Dni':self.Dni,
+                     'Vip':self.vip,
+                     'Necesidades':self.necesidades
+                     }
+        return diccionario

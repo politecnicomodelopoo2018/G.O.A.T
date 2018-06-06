@@ -13,3 +13,4 @@ class Vuelo(object):
         self.Destino = Destino
         self.pasajeros = []
         self.tripulantes = []
+    def Ej_1(self):
