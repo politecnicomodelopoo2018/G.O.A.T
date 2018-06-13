@@ -62,6 +62,10 @@ class Arolinea(object):
 
             for a in aux2['Aviones']:
                 UnAvion=avion()
+                UnAvion.modelo=a['codigoUnico']
+                UnAvion.cant_pasajeros_que_pueden_viajar=a['cantidadDePasajerosMaxima']
+                UnAvion.cantidad_de_tripulación_necesaria_para_volar=a['cantidadDeTripulaciónNecesaria']
+                self.Aviones.append(UnAvion)
 
 
 
