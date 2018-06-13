@@ -11,3 +11,10 @@ class persones(object):
         self.Fecha_nac = Fecha_nac
         self.Dni = Dni
 
+
+    def Retornar(self):
+        Dicc = {'Nombre': self.Nombre,
+                'Apellido': self.Apellido,
+                'Fecha_nac': self.Fecha_nac,
+                'Dni': self.Dni}
+
