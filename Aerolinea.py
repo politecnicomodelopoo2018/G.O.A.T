@@ -68,6 +68,9 @@ class Arolinea(object):
                 self.Aviones.append(UnAvion)
 
 
+#JSON puede ser creando una lista de pasajeros y otra de tripulantes.O ir buscando por dni mientras cargo los vuelos
+
+
 
 
 
