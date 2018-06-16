@@ -1,5 +1,8 @@
 import json
 from Avion import avion
+from Vuelo import Vuelo
+from Pasajeros import pasajeros
+from Tripulantes import tripulantes
 class Arolinea(object):
 
     Nombre = 'FlyEmirates'
@@ -54,6 +57,11 @@ class Arolinea(object):
             self.Diccionario['7'].append(a.EJ_7)
 
 
+    def JSON(self):
+        self.JSON_Avion()
+        self.JSON_Vuelos()
+        self.JSON_Persona()
+
     def JSON_Avion(self):
         with open('datos.json', 'r') as f:
             aux1=f.read()
@@ -68,7 +76,52 @@ class Arolinea(object):
                 self.Aviones.append(UnAvion)
 
 
-#JSON puede ser creando una lista de pasajeros y otra de tripulantes.O ir buscando por dni mientras cargo los vuelos
+    def JSON_Vuelos(self):
+        with open('datos.json', 'r') as f:
+            aux1 = f.read()
+
+            aux2 = json.loads(aux1)
+            for a in aux2['Vuelos']:
+
+                UnVuelo=Vuelo(a['avion'],a['fecha'],a['hora'],a['origen'],a['destino'])
+                UnVuelo.pasajeros=a['pasajeros']
+                UnVuelo.tripulantes=a['tripulacion']
+                self.Vuelos.append(UnVuelo)
+
+    def JSON_Persona(self):
+        Pasajeros = []
+        Tripulantes = []
+        with open('datos.json', 'r') as f:
+            aux1 = f.read()
+
+            aux2 = json.loads(aux1)
+            for a in aux2['Personas']:
+                if a['tipo'] == 'Pasajero':
+                    UnPasaj=pasajeros(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])
+                    UnPasaj.vip=a['vip']
+                    UnPasaj.necesidades=a['solicitudesEspeciales']
+                    Pasajeros.append(UnPasaj)
+                else :
+                    UnTripu=tripulantes(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])
+                    UnTripu.Modelos=a['avionesHabilitados']
+                    UnTripu.Idiomas=a['idiomas']
+                    Tripulantes.append(UnTripu)
+        self.JSON_Persona_parte_2(Pasajeros,Tripulantes)
+
+    def JSON_Persona_parte_2(self,pasaj,tripu):
+        for a in self.Vuelos:
+            for b in a.pasajeros:
+                for c in pasaj:
+                    if b.Dni == c.Dni:
+                        a.pasajeros[b]=c
+
+        for a in self.Vuelos:
+            for b in a.tripulantes:
+                for c in tripu:
+                    if b.Dni == c.Dni:
+                        a.tripulantes[b]=c
+
+
 
 
 
