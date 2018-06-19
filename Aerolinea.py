@@ -112,13 +112,13 @@ class Arolinea(object):
         for a in self.Vuelos:
             for b in a.pasajeros:
                 for c in pasaj:
-                    if b.Dni == c.Dni:
+                    if b == c.Dni:
                         a.pasajeros[b]=c
 
         for a in self.Vuelos:
             for b in a.tripulantes:
                 for c in tripu:
-                    if b.Dni == c.Dni:
+                    if b == c.Dni:
                         a.tripulantes[b]=c
 
 
