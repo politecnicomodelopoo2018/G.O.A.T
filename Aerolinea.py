@@ -22,6 +22,15 @@ class Arolinea(object):
         self.Aviones=[]
         self.Vuelos=[]
 
+    def Ejerecicios(self):
+        self.Ej_1()
+        self.Ej_2()
+        self.Ej_3()
+        self.Ej_4()
+        self.Ej_5()
+        self.Ej_6()
+        self.Ej_7()
+        return self.Diccionario
     def Ej_1(self):
         for a in self.Vuelos:
             self.Diccionario['1'].append(a.Dicc())
@@ -58,7 +67,7 @@ class Arolinea(object):
 
 
     def JSON(self):
-        self.JSON_Avion()
+
         self.JSON_Vuelos()
         self.JSON_Persona()
 
@@ -71,8 +80,8 @@ class Arolinea(object):
             for a in aux2['Aviones']:
                 UnAvion=avion()
                 UnAvion.modelo=a['codigoUnico']
-                UnAvion.cant_pasajeros_que_pueden_viajar=a['cantidadDePasajerosMaxima']
-                UnAvion.cantidad_de_tripulación_necesaria_para_volar=a['cantidadDeTripulaciónNecesaria']
+                UnAvion.cant_pasajeros_que_pueden_viajar = a['cantidadDePasajerosMaxima']
+                UnAvion.Tripulacionecesaria = a['cantidadDeTripulaciónNecesaria']
                 self.Aviones.append(UnAvion)
 
 
@@ -97,9 +106,7 @@ class Arolinea(object):
             aux2 = json.loads(aux1)
             for a in aux2['Personas']:
                 if a['tipo'] == 'Pasajero':
-                    UnPasaj=pasajeros(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])
-                    UnPasaj.vip=a['vip']
-                    UnPasaj.necesidades=a['solicitudesEspeciales']
+                    UnPasaj=pasajeros(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'],a['vip'],a['solicitudesEspeciales'])
                     Pasajeros.append(UnPasaj)
                 else :
                     UnTripu=tripulantes(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])

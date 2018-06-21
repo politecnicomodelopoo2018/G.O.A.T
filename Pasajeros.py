@@ -6,7 +6,7 @@ class pasajeros(persones):
     necesidades = None
 
     def __init__(self, Nombre, Apellido, Fecha_nac, Dni, vip, necesidades):
-        persones.__init__(Nombre, Apellido, Fecha_nac, Dni)
+        persones.__init__(self,Nombre, Apellido, Fecha_nac, Dni)
 
         self.vip = vip
         self.necesidades = necesidades
