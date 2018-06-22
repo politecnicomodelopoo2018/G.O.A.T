@@ -17,4 +17,5 @@ class persones(object):
                 'Apellido': self.Apellido,
                 'Fecha_nac': self.Fecha_nac,
                 'Dni': self.Dni}
+        return Dicc
 
