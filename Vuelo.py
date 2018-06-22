@@ -18,6 +18,7 @@ class Vuelo(object):
         diccionario = {'Vuelo': [{'Pasajero': []}]}
         for a in self.pasajeros:
             diccionario['Vuelo'['Pasajero']].append(a.Dicc())
+        return diccionario
 
     def Ej_2(self):
 

@@ -1,3 +1,4 @@
+import datetime
 import json
 from Avion import avion
 from Vuelo import Vuelo
@@ -33,7 +34,7 @@ class Arolinea(object):
         return self.Diccionario
     def Ej_1(self):
         for a in self.Vuelos:
-            self.Diccionario['1'].append(a.Dicc())
+            self.Diccionario['1'].append(a.Ej_1())
 
     def Ej_2(self):
         for a in self.Vuelos:
@@ -67,7 +68,7 @@ class Arolinea(object):
 
 
     def JSON(self):
-
+        self.JSON_Avion()
         self.JSON_Vuelos()
         self.JSON_Persona()
 
@@ -106,27 +107,51 @@ class Arolinea(object):
             aux2 = json.loads(aux1)
             for a in aux2['Personas']:
                 if a['tipo'] == 'Pasajero':
-                    UnPasaj=pasajeros(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'],a['vip'],a['solicitudesEspeciales'])
-                    Pasajeros.append(UnPasaj)
+                    if 'solicitudesEspeciales' in aux2['Personas']:
+                        UnPasaj=pasajeros(a['nombre'],a['apellido'],datetime.strptime(a['fechaNacimiento'], '%Y-%m-%d'),int(a['dni']),a['vip'],a['solicitudesEspeciales'])
+                        Pasajeros.append(UnPasaj)
+                    else:
+                        UnPasaj = pasajeros(a['nombre'], a['apellido'], a['fechaNacimiento'], a['dni'], a['vip'],
+                                            'Ninguna')
+                        Pasajeros.append(UnPasaj)
+
                 else :
-                    UnTripu=tripulantes(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])
-                    UnTripu.Modelos=a['avionesHabilitados']
-                    UnTripu.Idiomas=a['idiomas']
-                    Tripulantes.append(UnTripu)
+
+                    if 'idiomas' in a:
+                        UnTripu=tripulantes(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])
+                        UnTripu.Modelos=a['avionesHabilitados']
+                        UnTripu.Idiomas=a['idiomas']
+                        Tripulantes.append(UnTripu)
+                    else:
+                        UnTripu = tripulantes(a['nombre'], a['apellido'], a['fechaNacimiento'], a['dni'])
+                        UnTripu.Modelos = a['avionesHabilitados']
+                        UnTripu.Idiomas = 'No'
+                        Tripulantes.append(UnTripu)
+
         self.JSON_Persona_parte_2(Pasajeros,Tripulantes)
 
     def JSON_Persona_parte_2(self,pasaj,tripu):
         for a in self.Vuelos:
+            lista=[]
             for b in a.pasajeros:
                 for c in pasaj:
                     if b == c.Dni:
-                        a.pasajeros[b]=c
+                        lista.append(c)
+                        # a.pasajeros[b]=c
+
+            a.pasajeros=lista
 
         for a in self.Vuelos:
+            lista=[]
             for b in a.tripulantes:
                 for c in tripu:
                     if b == c.Dni:
-                        a.tripulantes[b]=c
+                        lista.append(c)
+                        # a.tripulantes[b]=c
+
+            a.tripulantes=lista
+
+
 
 
 
