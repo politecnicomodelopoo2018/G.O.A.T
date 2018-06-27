@@ -75,6 +75,7 @@ class Arolinea(object):
         self.JSON_Avion()
         self.JSON_Vuelos()
         self.JSON_Persona()
+        self.JSON_Avion_en_Vuelos()
 
     def JSON_Avion(self):
         with open('datos.json', 'r') as f:
@@ -103,37 +104,45 @@ class Arolinea(object):
                         UnVuelo.tripulantes=a['tripulacion']
                         self.Vuelos.append(UnVuelo)
 
+    def JSON_Avion_en_Vuelos(self):
+        for a in self.Vuelos:
+            for b in self.Aviones:
+                if a.Avion == b.modelo:
+                    a.Avion=b
+
+
+
     def JSON_Persona(self):
-        Pasajeros = []
-        Tripulantes = []
+        self.Pasajeros = []
+        self.Tripulantes = []
         with open('datos.json', 'r') as f:
             aux1 = f.read()
 
             aux2 = json.loads(aux1)
             for a in aux2['Personas']:
                 if a['tipo'] == 'Pasajero':
-                    if 'solicitudesEspeciales' in aux2['Personas']:
-                        UnPasaj=pasajeros(a['nombre'],a['apellido'],datetime.strptime(a['fechaNacimiento'], '%Y-%m-%d'),int(a['dni']),a['vip'],a['solicitudesEspeciales'])
-                        Pasajeros.append(UnPasaj)
+                    if 'solicitudesEspeciales' in a:
+                        UnPasaj=pasajeros(a['nombre'],a['apellido'],datetime.strptime(a['fechaNacimiento'], '%Y-%m-%d').date(),a['dni'],a['vip'],a['solicitudesEspeciales'])
+                        self.Pasajeros.append(UnPasaj)
                     else:
-                        UnPasaj = pasajeros(a['nombre'], a['apellido'], a['fechaNacimiento'], a['dni'], a['vip'],
+                        UnPasaj = pasajeros(a['nombre'], a['apellido'],datetime.strptime(a['fechaNacimiento'], '%Y-%m-%d').date(), a['dni'], a['vip'],
                                             'Ninguna')
-                        Pasajeros.append(UnPasaj)
+                        self.Pasajeros.append(UnPasaj)
 
                 else :
 
                     if 'idiomas' in a:
-                        UnTripu=tripulantes(a['nombre'],a['apellido'],a['fechaNacimiento'],a['dni'])
+                        UnTripu=tripulantes(a['nombre'],a['apellido'],datetime.strptime(a['fechaNacimiento'], '%Y-%m-%d').date(),a['dni'])
                         UnTripu.Modelos=a['avionesHabilitados']
                         UnTripu.Idiomas=a['idiomas']
-                        Tripulantes.append(UnTripu)
+                        self.Tripulantes.append(UnTripu)
                     else:
-                        UnTripu = tripulantes(a['nombre'], a['apellido'], a['fechaNacimiento'], a['dni'])
+                        UnTripu = tripulantes(a['nombre'], a['apellido'],datetime.strptime(a['fechaNacimiento'], '%Y-%m-%d').date(), a['dni'])
                         UnTripu.Modelos = a['avionesHabilitados']
                         UnTripu.Idiomas =''
-                        Tripulantes.append(UnTripu)
+                        self.Tripulantes.append(UnTripu)
 
-        self.JSON_Persona_parte_2(Pasajeros,Tripulantes)
+        self.JSON_Persona_parte_2(self.Pasajeros,self.Tripulantes)
 
     def JSON_Persona_parte_2(self,pasaj,tripu):
         for a in self.Vuelos:
@@ -142,7 +151,6 @@ class Arolinea(object):
                 for c in pasaj:
                     if b == c.Dni:
                         lista.append(c)
-                        # a.pasajeros[b]=c
 
             a.pasajeros=lista
 
@@ -152,7 +160,6 @@ class Arolinea(object):
                 for c in tripu:
                     if b == c.Dni:
                         lista.append(c)
-                        # a.tripulantes[b]=c
 
             a.tripulantes=lista
 

@@ -61,8 +61,7 @@ class Vuelo(object):
     def Ej_6(self):
         diccionario = {'Vuelo': [{'Pasajero': []}]}
         for a in self.pasajeros:
-            if a.vip is not 0 and a.necesidades is not 'Ninguna':
-                for a in self.pasajeros:
+            if a.vip != 0 or a.necesidades != 'Ninguna':
                     diccionario['Vuelo'][0]['Pasajero'].append(a.Dicc())
         return diccionario
 
