@@ -15,7 +15,7 @@ class persones(object):
     def Retornar(self):
         Dicc = {'Nombre': self.Nombre,
                 'Apellido': self.Apellido,
-                'Fecha_nac': self.Fecha_nac,
+                'Fecha_nac': str(self.Fecha_nac),
                 'Dni': self.Dni}
         return Dicc
 

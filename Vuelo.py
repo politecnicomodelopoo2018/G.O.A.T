@@ -59,7 +59,13 @@ class Vuelo(object):
         return self.dic
 
     def Ej_6(self):
-        diccionario = {'Vuelo': [{'Pasajero': []}]}
+        diccionario = {'Vuelo': [
+            {'Avion': self.Avion.modelo,
+             'Fecha': str(self.Fecha),
+             'Hora': self.Hora,
+             'Origen': self.Origen,
+             'Destino': self.Destino,
+             'Pasajero':[]}]}
         for a in self.pasajeros:
             if a.vip != 0 or a.necesidades != 'Ninguna':
                     diccionario['Vuelo'][0]['Pasajero'].append(a.Dicc())

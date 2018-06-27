@@ -15,7 +15,7 @@ class pasajeros(persones):
 
         diccionario={'Nombre':self.Nombre,
                      'Apellido':self.Apellido,
-                     'Fecha_nac':self.Fecha_nac,
+                     'Fecha_nac':str(self.Fecha_nac),
                      'Dni':self.Dni,
                      'Vip':self.vip,
                      'Necesidades':self.necesidades
