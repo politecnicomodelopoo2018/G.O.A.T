@@ -75,7 +75,7 @@ class Arolinea(object):
         self.JSON_Avion()
         self.JSON_Vuelos()
         self.JSON_Persona()
-        self.JSON_Avion_en_Vuelos()
+
 
     def JSON_Avion(self):
         with open('datos.json', 'r') as f:
@@ -104,11 +104,7 @@ class Arolinea(object):
                         UnVuelo.tripulantes=a['tripulacion']
                         self.Vuelos.append(UnVuelo)
 
-    def JSON_Avion_en_Vuelos(self):
-        for a in self.Vuelos:
-            for b in self.Aviones:
-                if a.Avion == b.modelo:
-                    a.Avion=b
+
 
 
 

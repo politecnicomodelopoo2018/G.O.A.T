@@ -38,9 +38,14 @@ class Vuelo(object):
         return Dicc
 
 
+    def tengoLaTripulacionNecesaria(self):
+        if len(self.tripulantes) < self.Avion.Tripulacionecesaria:
+            return False
+        return True
+
     def Ej_3(self):
 
-        if len(self.tripulantes) < self.Avion.Tripulacionecesaria:
+        if self.tengoLaTripulacionNecesaria():
             self.dik={'Avion':self.Avion.modelo,
                   'Fecha':str(self.Fecha),
                   'Hora':self.Hora,
