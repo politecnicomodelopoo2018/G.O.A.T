@@ -1,4 +1,4 @@
-from Aerolinea import Arolinea
+from TP1.Aerolinea import Arolinea
 import json
 
 A = Arolinea()

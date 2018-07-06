@@ -1,4 +1,4 @@
-from Personas import  persones
+from TP1.Personas import  persones
 
 class tripulantes (persones):
 

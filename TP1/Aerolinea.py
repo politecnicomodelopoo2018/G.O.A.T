@@ -2,10 +2,10 @@ from datetime import datetime
 
 
 import json
-from Avion import avion
-from Vuelo import Vuelo
-from Pasajeros import pasajeros
-from Tripulantes import tripulantes
+from TP1.Avion import avion
+from TP1.Vuelo import Vuelo
+from TP1.Pasajeros import pasajeros
+from TP1.Tripulantes import tripulantes
 class Arolinea(object):
 
     Nombre = 'FlyEmirates'
