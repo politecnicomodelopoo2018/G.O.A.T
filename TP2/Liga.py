@@ -15,10 +15,11 @@ class liga():
         self.cant_descensos=c
 
 
-    def getLiga(self):
+    def AllLigas(self,pais):
         a = db.connect("select * from Liga")
-        for b in a :
-            return b
+        lista = []
+        for b in a:
+            L = liga(b['Id_Liga'],b['Nombre'],b['Pais'],b['Division'],b['Cant_descensos'])
+            lista.append(L)
 
-    def
-
+        return lista

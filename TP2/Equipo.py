@@ -1,3 +1,4 @@
+from
 class equipo():
 
     id_equipo = None
@@ -10,5 +11,8 @@ class equipo():
         self.liga=l
         self.fundacion=f
 
-    def insert(self):
-        db.connect()
+    def AllEquipos(self):
+        a = db.connect("select * from Equipo")
+        lista = []
+        for b in a:
+
