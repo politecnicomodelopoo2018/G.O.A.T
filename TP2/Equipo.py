@@ -17,7 +17,7 @@ class equipo():
     def AllEquipos(self):
         a = db.connect("select * from Equipo")
         lista = []
-        listaLiga = Liga.AllLigas()
+        listaLiga = liga.AllLigas(self)
         for b in a:
             for c in listaLiga:
                 if c.id_liga == b['Liga']:
