@@ -15,7 +15,7 @@ class liga():
         self.cant_descensos=c
 
 
-    def AllLigas(self,pais):
+    def AllLigas(self):
         a = db.connect("select * from Liga")
         lista = []
         for b in a:
