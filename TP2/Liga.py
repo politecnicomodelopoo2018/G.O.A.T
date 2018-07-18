@@ -15,7 +15,7 @@ class liga():
         self.cant_descensos=c
 
 
-    def AllLigas(self):
+    def Leer(self):
         a = db.connect("select * from Liga")
         lista = []
         for b in a:
@@ -23,3 +23,12 @@ class liga():
             lista.append(L)
 
         return lista
+
+    def Borrar(self):
+        a = db.connect("delete from Liga where Id_Liga = %S",self.id_liga)
+        #if a = #algo :
+         #   return 'Borrado con exito'
+
+    def Actualizar(self):
+        a = db.connect("update Liga set Pais = %S , Id_Liga = %S , Division = %S , Cant_descensos  = %S , Nombre = %S",
+                       self.pais,self.id_liga,self.division,self.cant_descensos,self.nombre)

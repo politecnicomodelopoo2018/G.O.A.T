@@ -14,10 +14,10 @@ class equipo():
         self.fundacion=f
         self.nombre=n
 
-    def AllEquipos(self):
+    def Leer(self):
         a = db.connect("select * from Equipo")
         lista = []
-        listaLiga = liga.AllLigas(self)
+        listaLiga = liga.Leer(self)
         for b in a:
             for c in listaLiga:
                 if c.id_liga == b['Liga']:
@@ -25,4 +25,13 @@ class equipo():
                     lista.append(E)
         return lista
 
+
+    def Borrar(self):
+        a = db.connect("delete from Equipo where Id_Equipo = %S",self.id_equipo)
+        #if a = #algo :
+         #   return 'Borrado con exito'
+
+    def Actualizar(self):
+        a = db.connect("update Equipo set Id_Equipo = = $S , Liga = %S , Fundacion = %S , Nombre = %S",
+                       self.id_equipo,self.liga,self.fundacion,self.nombre)
 
