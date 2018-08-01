@@ -27,11 +27,11 @@ class equipo():
 
 
     def Borrar(self):
-        a = db.connect("delete from Equipo where Id_Equipo = %S",self.id_equipo)
+        a = db.connect("delete from Equipo where Id_Equipo = %s" % (self.id_equipo))
         #if a = #algo :
          #   return 'Borrado con exito'
 
     def Actualizar(self):
-        a = db.connect("update Equipo set Id_Equipo = = $S , Liga = %S , Fundacion = %S , Nombre = %S",
-                       self.id_equipo,self.liga,self.fundacion,self.nombre)
+        a = db.connect("update Equipo set Id_Equipo  = %s and Liga = %s , Fundacion = %s , Nombre = %s ;" %
+                       (self.id_equipo,self.liga,self.fundacion,self.nombre))
 

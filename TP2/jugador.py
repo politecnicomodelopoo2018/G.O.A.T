@@ -5,7 +5,7 @@ class jugador(persona):
     posicion = None
 
     def __init__(self,d,n,a,s,f,na,e,p):
-        persona.__init__(d,n,a,s,f,na,e)
+        persona.__init__(self,d,n,a,s,f,na,e)
         self.posicion=p
 
     def Leer(self, equipo):
@@ -21,12 +21,10 @@ class jugador(persona):
                     lista.append(j)
         return lista
     def Borrar(self):
-        a = db.connect("delete from Jugador where Dni = %S",persona.dni)
-        #if a = #algo :
-         #   return 'Borrado con exito'
+        a = db.connect("delete from Jugador where Dni = %s ;" % self.dni)
 
     def Actualizar(self):
         a = db.connect("update Jugador set Dni = %S , Nombre = %S , Apellido = %S , Posicion = %S , Sueldo = %S , "
-                       "Fecha_nac = %S , Nacionalidad = %S , Equipo = %S",
+                       "Fecha_nac = %S , Nacionalidad = %S , Equipo = %S ;",
                        persona.dni,persona.nombre,persona.apellido,self.posicion,persona.sueldo,persona.fecha_nac,
                        persona.nacionalidad,persona.equipo)

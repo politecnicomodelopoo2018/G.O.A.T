@@ -2,7 +2,7 @@ from persona import persona
 from Equipo import equipo
 from DB import db
 class dt(persona):
-    pass
+
 
 
     def Leer(self):
@@ -17,10 +17,8 @@ class dt(persona):
                     lista.append(DT)
         return lista
 
-    def Borrar(self,tabla,campo,contenido_campo):
-        a = db.connect("delete from DT where Dni = %S",persona.dni)
-     # if a = #algo :
-      #      return 'Borrado con exito'
+    def Borrar(self):
+        a = db.connect("delete from DT where Dni = %s" % self.dni)
 
     def Actualizar(self):
         a = db.connect("update DT set Dni = %S ,Nombre = %S ,Apellido = %S ,Sueldo = %S,Fecha_nac = %S ,"
