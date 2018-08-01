@@ -21,7 +21,7 @@ class dt(persona):
         a = db.connect("delete from DT where Dni = %s" % self.dni)
 
     def Actualizar(self):
-        a = db.connect("update DT set Dni = %S ,Nombre = %S ,Apellido = %S ,Sueldo = %S,Fecha_nac = %S ,"
-                       "Nacionalidad = %S ,Equipo = %S",
-                       persona.dni,persona.nombre,persona.apellido,persona.sueldo,persona.fecha_nac,
-                       persona.nacionalidad,persona.equipo)
+        a = db.connect("update DT set Nombre = '%s' ,Apellido = '%s' ,Sueldo = %s ,Fecha_nac = %s ,"
+                       "Nacionalidad = '%s' ,Equipo = %s where Dni = %s;" %
+                       (self.nombre,self.apellido,self.sueldo,self.fecha_nac,
+                       self.nacionalidad,self.equipo,self.dni))

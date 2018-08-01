@@ -28,3 +28,6 @@ class jugador(persona):
                        "Fecha_nac = '%s' , Nacionalidad = '%s', Equipo = %s where Dni = %s;" %
                        (self.nombre,self.apellido,self.posicion,self.sueldo,self.fecha_nac,
                        self.nacionalidad,self.equipo,self.dni))
+
+    def Insert(self):
+        a = db.connect("INSERT INTO `mydb`.`Jugador` (`Dni`, `Nombre`, `Apellido`, `Posicion`, `Sueldo`, `Fecha_nac`, `Nacionalidad`, `Equipo`) VALUES (%s,%s,%s,%s,%s,%s,%s)" % )

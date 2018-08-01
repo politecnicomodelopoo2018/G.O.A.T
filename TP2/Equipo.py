@@ -33,3 +33,8 @@ class equipo():
         a = db.connect("update Equipo set  Liga = %s , Fundacion = '%s' , Nombre = '%s' where Id_Equipo = %s;" %
                        (self.liga,self.fundacion,self.nombre,self.id_equipo))
 
+
+    def Insert(self):
+        a = db.connect("INSERT INTO `mydb`.`Equipo` (`Id_Equipo`, `Liga`, `Fundacion`, `Nombre`) VALUES (%s,%s,'%s','%s')"
+                       % (self.id_equipo,self.liga,self.fundacion,self.nombre))
+
