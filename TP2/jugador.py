@@ -24,7 +24,7 @@ class jugador(persona):
         a = db.connect("delete from Jugador where Dni = %s ;" % self.dni)
 
     def Actualizar(self):
-        a = db.connect("update Jugador set Dni = %S , Nombre = %S , Apellido = %S , Posicion = %S , Sueldo = %S , "
-                       "Fecha_nac = %S , Nacionalidad = %S , Equipo = %S ;",
-                       persona.dni,persona.nombre,persona.apellido,self.posicion,persona.sueldo,persona.fecha_nac,
-                       persona.nacionalidad,persona.equipo)
+        a = db.connect("update Jugador set  Nombre = '%s' , Apellido = '%s' , Posicion = '%s' , Sueldo = %s , "
+                       "Fecha_nac = '%s' , Nacionalidad = '%s', Equipo = %s where Dni = %s;" %
+                       (self.nombre,self.apellido,self.posicion,self.sueldo,self.fecha_nac,
+                       self.nacionalidad,self.equipo,self.dni))
