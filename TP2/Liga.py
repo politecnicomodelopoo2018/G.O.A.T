@@ -14,8 +14,8 @@ class liga():
         self.division=d
         self.cant_descensos=c
 
-
-    def Leer(self):
+    @staticmethod
+    def Leer():
         a = db.connect("select * from Liga")
         lista = []
         for b in a:

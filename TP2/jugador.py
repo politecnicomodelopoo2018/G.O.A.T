@@ -8,14 +8,15 @@ class jugador(persona):
         persona.__init__(self,d,n,a,s,f,na,e)
         self.posicion=p
 
-    def Leer(self, equipo):
-        a = db.connect("select * from Jugador",(equipo))
+    @staticmethod
+    def Leer():
+        a = db.connect("select * from Jugador")
         lista = []
         listaEquipos = equipo.Leer()
         for b in a:
             for c in listaEquipos:
                 if c.id_equipo == b['Equipo']:
-                    j = jugador(b['Dni'],b['Nombre'],b['Apellido'],b['Sueldo'],b['Fecha_nac'],b['Nacionalidad']
+                    j = jugador(b['Dni'],b['Nombre'],b['Apellido'],b['Sueldo'],b['Fecha_nac'],b['Nacionalidad'],c
                                 ,b['Posicion'])
 
                     lista.append(j)
@@ -30,4 +31,7 @@ class jugador(persona):
                        self.nacionalidad,self.equipo,self.dni))
 
     def Insert(self):
-        a = db.connect("INSERT INTO `mydb`.`Jugador` (`Dni`, `Nombre`, `Apellido`, `Posicion`, `Sueldo`, `Fecha_nac`, `Nacionalidad`, `Equipo`) VALUES (%s,%s,%s,%s,%s,%s,%s)" % )
+        a = db.connect("INSERT INTO `mydb`.`Jugador` (`Dni`, `Nombre`, `Apellido`, `Posicion`, `Sueldo`, `Fecha_nac`, "
+                       "`Nacionalidad`, `Equipo`) VALUES (%s,'%s','%s','%s','%s','%s','%s','%s') ;"
+                       % (self.dni,self.nombre,self.apellido,self.posicion,self.sueldo,self.fecha_nac,self.nacionalidad
+                        ,self.equipo))

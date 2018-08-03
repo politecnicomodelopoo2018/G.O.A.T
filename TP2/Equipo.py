@@ -14,10 +14,11 @@ class equipo():
         self.fundacion=f
         self.nombre=n
 
-    def Leer(self):
+    @staticmethod
+    def Leer():
         a = db.connect("select * from Equipo")
         lista = []
-        listaLiga = liga.Leer(self)
+        listaLiga = liga.Leer()
         for b in a:
             for c in listaLiga:
                 if c.id_liga == b['Liga']:
