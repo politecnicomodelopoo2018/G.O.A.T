@@ -30,7 +30,8 @@ class liga():
          #   return 'Borrado con exito'
 
     def Actualizar(self):
-        a = db.connect("update Liga set Pais = '%s' , Division = '%s' , Cant_descensos  = %s , Nombre = '%s' where Id_Liga = %s ; " % (self.pais,self.id_liga,self.division,self.cant_descensos,self.nombre,self.id_liga))
+        a = db.connect("update Liga set Pais = '%s' , Division = '%s' , Cant_descensos  = %s , Nombre = '%s' where "
+                       "Id_Liga = %s ; " % (self.pais,self.division,self.cant_descensos,self.nombre,self.id_liga))
 
 
     def Insert(self):

@@ -31,8 +31,8 @@ class equipo():
         a = db.connect("delete from Equipo where Id_Equipo = %s" % (self.id_equipo))
 
     def Actualizar(self):
-        a = db.connect("update Equipo set  Liga = %s , Fundacion = '%s' , Nombre = '%s' where Id_Equipo = %s;" %
-                       (self.liga,self.fundacion,self.nombre,self.id_equipo))
+        a = db.connect("update Equipo set  Fundacion = '%s' , Nombre = '%s' where Id_Equipo = %s;" %
+                       (self.fundacion,self.nombre,self.id_equipo))
 
 
     def Insert(self):
