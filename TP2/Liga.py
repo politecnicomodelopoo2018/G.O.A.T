@@ -26,8 +26,6 @@ class liga():
 
     def Borrar(self):
         a = db.connect("delete from Liga where Id_Liga = %s"% (self.id_liga))
-        #if a = #algo :
-         #   return 'Borrado con exito'
 
     def Actualizar(self):
         a = db.connect("update Liga set Pais = '%s' , Division = '%s' , Cant_descensos  = %s , Nombre = '%s' where "
