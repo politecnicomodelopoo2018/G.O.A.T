@@ -2,7 +2,7 @@ from Liga import liga
 from Equipo import equipo
 from jugador import jugador
 from DT import dt
-
+from prettytable import PrettyTable
 class Menu(object):
 
 
@@ -10,13 +10,12 @@ class Menu(object):
 
 
         self.MENU()
-
     def MENU(self):
         print('---------MENU---------')
         print('|1)       Delete      |')
         print('|2)       Insert      |')
         print('|3)       Modificar   |')
-        print('|4)       Cargar      |')
+        print('|4)       Mostrar     |')
         print('|5)       Crear       |')
         print('----------------------')
 
@@ -24,14 +23,12 @@ class Menu(object):
 
         if a == 1:
             self.MenuDelete()
-        if a == 2:
+        elif a == 2:
             self.MenuInsert()
-        if a == 3:
+        elif a == 3:
             self.MenuModificar()
-        if a == 4 :
-            self.MenuCargar()
-
-
+        elif a == 4 :
+            self.MenuMostrar()
     def MenuDelete(self):
 
         print('---------MENU---------')
@@ -52,7 +49,6 @@ class Menu(object):
             for c in ligas:
                 if b == c.nombre:
                     c.Borrar()
-
         if a == 2:
             b = input('Inserte el nombre del Equipo')
 
@@ -61,7 +57,6 @@ class Menu(object):
             for c in equipos:
                 if b == c.nombre:
                     c.Borrar()
-
         if a == 3:
 
             b = input('Inserte el dni del Jogadore')
@@ -71,8 +66,6 @@ class Menu(object):
             for c in jugadores:
                 if b == c.dni:
                     c.Borrar()
-
-
         if a == 4:
             b = input('Inserte el dni del DT')
 
@@ -80,11 +73,8 @@ class Menu(object):
             for c in Dts:
                 if b == c.dni:
                     c.Borrar()
-
         self.MENU()
-
-
-    def MenuCargar(self):
+    def MenuMostrar(self):
 
         print('---------MENU---------')
         print('|1)      Liga        |')
@@ -96,30 +86,93 @@ class Menu(object):
         a = int(input())
 
         if a == 1 :
-            b = liga.Leer()
 
-            for c in b :
-                print(c.nombre)
+            print('---------MENU---------')
+            print('|1)      Una Liga    |')
+            print('|2)      Todas       |')
+            print('----------------------')
+
+            op = int(input())
+            t = PrettyTable(['id_liga', 'nombre', 'pais', 'division', 'cant_descensos'])
+            if op == 1:
+                id_insertada = input('Inserte el id de la liga')
+                lista = liga.Leer()
+
+                for y in lista:
+                    if y.id_liga == id_insertada:
+                        t.add_row([y.id_liga, y.nombre,y.pais,y.division,y.cant_descensos])
+
+            elif op == 2:
+                lista = liga.Leer()
+
+                for y in lista:
+                        t.add_row([y.id_liga, y.nombre, y.pais, y.division, y.cant_descensos])
+            print(t)
 
 
         elif a == 2:
+            print('---------MENU---------')
+            print('|1)      Un Equipo   |')
+            print('|2)      Todos       |')
+            print('----------------------')
 
-            b = equipo.Leer()
+            op = int(input())
+            t = PrettyTable(['id_equipo','liga','fundacion','nombre'])
 
-            for c in b:
-                print(c.nombre)
-
+            if op == 1:
+                id_insertada = input('Inserte el id del equipo')
+                lista = equipo.Leer()
+                for y in lista:
+                    if y.id_equipo == id_insertada:
+                        t.add_row([y.id_equipo,y.liga,y.fundacion,y.nombre])
+            elif op == 2:
+                lista = equipo.Leer()
+                for y in lista:
+                        t.add_row([y.id_equipo, y.liga, y.fundacion, y.nombre])
+            print(t)
         elif a == 3:
-            b = jugador.Leer()
+            print('---------MENU---------')
+            print('|1)      Un Jugador  |')
+            print('|2)      Todos       |')
+            print('----------------------')
 
-            for c in b:
-                print(c.nombre)
+            op = input()
+            t = PrettyTable(['dni','nombre','apellido','sueldo','fecha_nac','nacionalidad','equipo','posicion'])
+            if op == 1:
+                dni_insertado= input('Inserte el dni del jugador')
+                lista = jugador.Leer()
+
+                for y in lista:
+                    if y.dni == dni_insertado:
+                        t.add_row([y.dni,y.nombre,y.apellido,y.sueldo,y.fecha_nac,y.nacionalidad,y.equipo,y.posicion])
+            elif op == 2:
+                lista = jugador.Leer()
+
+                for y in lista:
+                        t.add_row([y.dni, y.nombre, y.apellido, y.sueldo, y.fecha_nac, y.nacionalidad, y.equipo, y.posicion])
+            print(t)
+
+
         elif a == 4:
-            b = dt.Leer()
+            print('---------MENU---------')
+            print('|1)      Un DT       |')
+            print('|2)      Todos       |')
+            print('----------------------')
 
-            for c in b:
-                print(c.nombre)
+            op = input()
+            t = PrettyTable(['dni','nombre','apellido','sueldo','fecha_nac','nacionalidad','equipo'])
+            if op == 1:
+                lista = dt.Leer()
+                dni_insertado = input('Inserte el dni del DT')
+                for y in lista:
+                    if y.dni == dni_insertado:
+                        t.add_row([y.dni, y.nombre, y.apellido, y.sueldo, y.fecha_nac, y.nacionalidad, y.equipo])
 
+            elif op == 2:
+                lista = dt.Leer()
+                for y in lista:
+                        t.add_row([y.dni, y.nombre, y.apellido, y.sueldo, y.fecha_nac, y.nacionalidad, y.equipo])
+            print(t)
 
         self.MENU()
     def MenuModificar(self):
@@ -133,93 +186,89 @@ class Menu(object):
 
         a = int(input())
         if a == 1:
-            ligas = liga.Leer()
+            ligas_leidas = liga.Leer()
 
             b = int(input('Inserte el id de la liga a modificar'))
 
-            for c in ligas:
+            for c in ligas_leidas:
                 if b == c.id_liga:
                     print('A continuacion los campos a modificar (0 = no modificar)')
-                    id_liga = int(input('Id de la liga'))
-                    nombre = str(input('nombre'))
-                    pais = str(input('pais'))
-                    division = str(input('division'))
-                    cant_descensos = int(input('cant de descensos'))
+                    id_liga_liga = int(input('Id de la liga'))
+                    nombre_liga = str(input('nombre'))
+                    pais_liga = str(input('pais'))
+                    division_liga = str(input('division'))
+                    cant_descensos_liga = int(input('cant de descensos'))
 
-                    if id_liga is not 0:
-                        c.id_liga = id_liga
-                    elif nombre is not 0:
-                        c.nombre = nombre
-                    elif pais is not 0 :
-                        c.pais = pais
-                    elif division is not 0:
-                        c.cant_descensos = cant_descensos
+                    if id_liga_liga is not 0:
+                        c.id_liga = id_liga_liga
+                    elif nombre_liga is not 0:
+                        c.nombre = nombre_liga
+                    elif pais_liga is not 0 :
+                        c.pais = pais_liga
+                    elif division_liga is not 0:
+                        c.division = division_liga
+                    elif cant_descensos_liga is not 0:
+                        c.cant_descensos = cant_descensos_liga
+
                     c.Actualizar()
-
-
-
-
         if a == 2:
-            equipos = equipo.Leer()
+            equipos_leidos = equipo.Leer()
             b = int(input('Inserte el id del Equipo a modificar'))
 
-            for c in equipos:
+            for c in equipos_leidos:
                 if b == c.id_equipo:
 
                     print('A continuacion los campos a modificar (0 = no modificar)')
 
-                    id_equipo = int(input('Id'))
-                    fundacionin = str(input('fundacion'))
-                    nombrein = str(input('nombre'))
+                    id_equipo_equipo = int(input('Id'))
+                    fundacion_equipo = str(input('fundacion'))
+                    nombre_equipo = str(input('nombre'))
 
 
 
-                    if id_equipo is not 0:
-                        c.id_equipo = id_equipo
-                    elif fundacionin is not 0:
-                        c.fundacion = fundacionin
-                    elif nombrein is not 0:
-                        c.nombre = nombrein
+                    if id_equipo_equipo is not 0:
+                        c.id_equipo = id_equipo_equipo
+                    elif fundacion_equipo is not 0:
+                        c.fundacion = fundacion_equipo
+                    elif nombre_equipo is not 0:
+                        c.nombre = nombre_equipo
 
                     c.Actualizar()
-
-
         if a == 3:
-            jugadores = jugador.Leer()
+            jugadores_leidos = jugador.Leer()
             b = int(input('Inserte el dni del Jogadore a modificar'))
-            for c in jugadores:
+
+            for c in jugadores_leidos:
                 if b == c.dni:
                     print('Acontinuacion los campos a modificar (0 = no modificar)')
 
-                    dni = input('dni')
-                    nombre = input('nombre')
-                    apellido = input('apellido')
-                    sueldo = input('sueldo')
-                    fecha_nac = input('fecha de nacimiento')
-                    nacionalidad = input('nacionalidad')
-                    equipoIN = input('equipo')
-                    posicion = input('Posicion')
+                    dni_jugador = int(input('dni'))
+                    nombre_jugador = str(input('nombre'))
+                    apellido_jugador = str(input('apellido'))
+                    sueldo_jugador = int(input('sueldo'))
+                    fecha_nac_jugador = str(input('fecha de nacimiento'))
+                    nacionalidad_jugador = str(input('nacionalidad'))
+                    equipo_jugador = int(input('equipo'))
+                    posicion_jugador = str(input('Posicion'))
 
-                    if dni is not 0:
-                        c.dni = dni
-                    elif nombre is not 0:
-                        c.nombre = nombre
-                    elif apellido is not 0:
-                        c.apellido = apellido
-                    elif sueldo is not 0:
-                        c.sueldo = sueldo
-                    elif fecha_nac is not 0:
-                        c.fecha_nac = fecha_nac
-                    elif nacionalidad is not 0:
-                        c.nacionalidad = nacionalidad
-                    elif equipoIN is not 0:
-                        c.equipo = equipoIN
-                    elif posicion is not 0:
-                        c.posicion = posicion
+                    if dni_jugador is not 0:
+                        c.dni = dni_jugador
+                    elif nombre_jugador is not 0:
+                        c.nombre = nombre_jugador
+                    elif apellido_jugador is not 0:
+                        c.apellido = apellido_jugador
+                    elif sueldo_jugador is not 0:
+                        c.sueldo = sueldo_jugador
+                    elif fecha_nac_jugador is not 0:
+                        c.fecha_nac = fecha_nac_jugador
+                    elif nacionalidad_jugador is not 0:
+                        c.nacionalidad = nacionalidad_jugador
+                    elif equipo_jugador is not 0:
+                        c.equipo = equipo_jugador
+                    elif posicion_jugador is not 0:
+                        c.posicion = posicion_jugador
 
                     c.Actualizar()
-
-
         if a == 4:
             dts = dt.Leer()
             b = int(input('Inserte el dni del DT a modificar'))
@@ -228,34 +277,31 @@ class Menu(object):
 
                     print('Acontinuacion los campos a modificar (0 = no modificar)')
 
-                    dni = input('dni')
-                    nombre = input('nombre')
-                    apellido = input('apellido')
-                    sueldo = input('sueldo')
-                    fecha_nac = input('fecha de nacimiento')
-                    nacionalidad = input('nacionalidad')
-                    equipoIN = input('equipo')
+                    dni_DT = int(input('dni'))
+                    nombre_DT = str(input('nombre'))
+                    apellido_DT = str(input('apellido'))
+                    sueldo_DT = int(input('sueldo'))
+                    fecha_nac_DT = str(input('fecha de nacimiento'))
+                    nacionalidad_DT = str(input('nacionalidad'))
+                    equipo_DT = int(input('equipo'))
 
-                    if dni is not 0:
-                        c.dni = dni
-                    elif nombre is not 0:
-                        c.nombre = nombre
-                    elif apellido is not 0:
-                        c.apellido = apellido
-                    elif sueldo is not 0:
-                        c.sueldo = sueldo
-                    elif fecha_nac is not 0:
-                        c.fecha_nac = fecha_nac
-                    elif nacionalidad is not 0:
-                        c.nacionalidad = nacionalidad
-                    elif equipoIN is not 0:
-                        c.equipo = equipoIN
+                    if dni_DT is not 0:
+                        c.dni = dni_DT
+                    elif nombre_DT is not 0:
+                        c.nombre = nombre_DT
+                    elif apellido_DT is not 0:
+                        c.apellido = apellido_DT
+                    elif sueldo_DT is not 0:
+                        c.sueldo = sueldo_DT
+                    elif fecha_nac_DT is not 0:
+                        c.fecha_nac = fecha_nac_DT
+                    elif nacionalidad_DT is not 0:
+                        c.nacionalidad = nacionalidad_DT
+                    elif equipo_DT is not 0:
+                        c.equipo = equipo_DT
 
                     c.Actualizar()
-
-
         self.MENU()
-
     def MenuInsert(self):
         print('---------MENU---------')
         print('|1)      Liga        |')
@@ -266,29 +312,43 @@ class Menu(object):
 
         a = int(input())
         if a == 1:
-            b = input('Inserte el nombre de la liga')
+            print('A continuacion los campos de la liga' )
+            id_liga_liga = int(input('Id de la liga'))
+            nombre_liga = str(input('nombre'))
+            pais_liga = str(input('pais'))
+            division_liga = str(input('division'))
+            cant_descensos_liga = int(input('cant de descensos'))
 
-            for c in self.Ligas:
-                if b == c.nombre:
-                    c.Insert()
-
+            new_liga = liga(id_liga_liga,nombre_liga,pais_liga,division_liga,cant_descensos_liga)
+            new_liga.Insert()
         if a == 2:
-            b = input('Inserte el nombre del Equipo')
+            id_equipo_equipo = int(input('Id'))
+            fundacion_equipo = str(input('fundacion'))
+            nombre_equipo = str(input('nombre'))
 
-            for c in self.Equipos:
-                if b == c.nombre:
-                    c.Insert()
-
+            new_equipo = equipo(id_equipo_equipo,fundacion_equipo,nombre_equipo)
+            new_equipo.Insert()
         if a == 3:
-            b = input('Inserte el dni del Jogadore')
-            for c in self.Jugadores:
-                if b == c.dni:
-                    c.Insert()
+            dni_jugador = int(input('dni'))
+            nombre_jugador = str(input('nombre'))
+            apellido_jugador = str(input('apellido'))
+            sueldo_jugador = int(input('sueldo'))
+            fecha_nac_jugador = str(input('fecha de nacimiento'))
+            nacionalidad_jugador = str(input('nacionalidad'))
+            equipo_jugador = int(input('equipo'))
+            posicion_jugador = str(input('Posicion'))
 
+            new_jugador = jugador(dni_jugador,nombre_jugador,apellido_jugador,sueldo_jugador,fecha_nac_jugador,nacionalidad_jugador,equipo_jugador,posicion_jugador)
+            new_jugador.Insert()
         if a == 4:
-            b = input('Inserte el dni del DT')
-            for c in self.DTs:
-                if b == c.dni:
-                    c.Insert()
+            dni_DT = int(input('dni'))
+            nombre_DT = str(input('nombre'))
+            apellido_DT = str(input('apellido'))
+            sueldo_DT = int(input('sueldo'))
+            fecha_nac_DT = str(input('fecha de nacimiento'))
+            nacionalidad_DT = str(input('nacionalidad'))
+            equipo_DT = int(input('equipo'))
+
+            new_dt = dt(dni_DT,nombre_DT,apellido_DT,sueldo_DT,fecha_nac_DT,nacionalidad_DT,equipo_DT)
 
         self.MENU()
