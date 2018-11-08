@@ -1,24 +1,25 @@
 class mascota(object):
-
-    Nombre = None
-    Dueno = None
-    Saludo = None
-    Saludo_extrano = None
-    Tipo = None
-
     def __init__(self,N,D,T):
-        self.Nombre = N
-        self.Dueno = D
-        self.Tipo = T
+        self.Nombre = str(N)
+        self.Dueno = str(D)
+        self.Tipo = str(T)
+        self.Saludo_extrano = None
+        self.Saludo = None
+        self.saludos()
 
-        if self.Tipo is "Pajarito":
+
+
+    def saludos(self):
+        if self.Tipo == "Pajarito":
             self.Saludo = "pio"
-        elif self.Tipo is "Perro":
+        if self.Tipo == "Perro":
             self.Saludo = "guau"
-        elif self.Tipo is "Gato":
+        if self.Tipo == "Gato":
             self.Saludo = "miau"
-
         self.Saludo_extrano = self.Saludo.upper()
+
+
+
 
 
 
@@ -26,7 +27,7 @@ class mascota(object):
         self.Cantor = r
         self.Saludo  = S
         if self.Cantor:
-            self.Saludo_extrano = None
+            self.Saludo_extrano = ""
 
     def modificar(self,N,D):
         self.Nombre = N
