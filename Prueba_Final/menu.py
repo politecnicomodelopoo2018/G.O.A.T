@@ -35,7 +35,7 @@ class menu(object):
         tipo=str(input())
         d = dueño(Dnombre)
         if tipo == "Pez":
-            m = pez
+            m = pez(Mnombre,d)
         self.mascotas.append(m)
         self.inicial()
     def saludar(self):
@@ -44,8 +44,7 @@ class menu(object):
         print("Ingrese su nombre")
         Dn = str(input())
         for a in self.mascotas:
-            if Mn == a.getNombre():
-                a.saludar(Dn)
+            a.saludar(Dn,Mn)
             if a.morido():
                 self.mascotas.remove(a)
                 print("Esta morido")

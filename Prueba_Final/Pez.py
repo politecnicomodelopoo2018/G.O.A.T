@@ -1,10 +1,12 @@
 from Prueba_Final.Macota import mascota
 class pez(mascota):
-    vidas = 1
+    vidas = 10
 
 
-    def saludar(self,d):
-        if d.getNombre == self.dueño.getNombre():
+
+
+    def saludar(self,d,n):
+        if d == self.dueño.getNombre() and n == self.dueño.getNombre():
             if self.vidas is not 0:
                 self.vidas-=1
         else:
@@ -14,6 +16,6 @@ class pez(mascota):
         self.vidas+=1
 
     def morido(self):
-        if self.vidas is 0:
+        if self.vidas == 0:
             return True
         return False
