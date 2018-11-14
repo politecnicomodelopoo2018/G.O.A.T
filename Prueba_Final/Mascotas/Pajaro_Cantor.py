@@ -5,8 +5,7 @@ class pajaro_cantor(mascota):
         mascota.__init__(nombre,dueño)
         self.canto=canto
 
-    def saludar(self, nombre, nombre_dueño):
-        if nombre == self.nombre:
-            if nombre_dueño == self.dueño.get_nombre():
-                return self.canto
-            return ""
+    def saludar(self,nombre_dueño):
+        if nombre_dueño == self.dueño.get_nombre():
+             return self.canto
+        return ""

@@ -1,6 +1,7 @@
 class mascota(object):
     nombre = None
     dueño = None
+    vidas = 3
 
     def __init__(self,nombre,dueño):
         self.nombre=nombre
@@ -17,3 +18,9 @@ class mascota(object):
         self.dueño=dueño
     def mod_nombre(self,nombre):
         self.nombre=nombre
+    def get_nombre_dueño(self):
+        return self.dueño.get_nombre()
+    def alimentarse(self):
+        self.vidas += 1
+    def nombre_clase(self):
+        return type(self).__name__

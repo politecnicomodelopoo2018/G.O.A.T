@@ -24,6 +24,7 @@ class menu(object):
         print("--------------------------")
         print("|       1) ABM           |")
         print("|       2) Saludar       |")
+        print("|       3) Alimentarse   |")
         print("--------------------------")
         rta = int(input())
 
@@ -31,6 +32,8 @@ class menu(object):
             menu.ABM(menu)
         elif rta == 2:
             menu.Saludar(menu)
+        elif rta == 3:
+            menu.Alimentarse(menu)
 
     def ABM(self):
         print("--------------------------")
@@ -210,11 +213,28 @@ class menu(object):
         Nombre_mascota = str(input())
 
         for a in self.mascotas:
-            if a.get_nombre ==  Nombre_dueño:
-                a.saludar(Nombre_mascota)
-            if a.__class__.__name__ == "pez":
-                if a.muerto():
-                    "Se murió"
+            if a.get_nombre() ==  Nombre_mascota:
+                print(a.saludar(Nombre_dueño))
+            if a.get_nombre_dueño() is not Nombre_dueño:
+                if a.nombre_clase() == "pez":
+                    if a.muerto():
+                        print("Se murió")
+                        self.mascotas.remove(a)
+            a.entristeser()
+        self.iniciar()
+
+    def Alimentarse(self):
+        print("----------------------------------------")
+        print("|    Ingrese el nombre de la mascota   |")
+        print("----------------------------------------")
+        Nombre_mascota = str(input())
+
+        for a in self.mascotas:
+            if a.get_nombre() == Nombre_mascota:
+                a.alimentarse()
+        self.iniciar()
+
+
 
 
 
