@@ -30,7 +30,7 @@ class menu(object):
         if rta == 1:
             menu.ABM(menu)
         elif rta == 2:
-            pass
+            menu.Saludar(menu)
 
     def ABM(self):
         print("--------------------------")
@@ -196,6 +196,25 @@ class menu(object):
                             Nombre_mascota = str(input())
                             a.mod_nombre(Nombre_mascota)
                             print("¡Nombre modificado con exito!")
+
+    def Saludar(self):
+
+        print("--------------------------")
+        print("|    Ingrese su nombre   |")
+        print("--------------------------")
+        Nombre_dueño = str(input())
+
+        print("----------------------------------------")
+        print("|    Ingrese el nombre de la mascota   |")
+        print("----------------------------------------")
+        Nombre_mascota = str(input())
+
+        for a in self.mascotas:
+            if a.get_nombre ==  Nombre_dueño:
+                a.saludar(Nombre_mascota)
+            if a.__class__.__name__ == "pez":
+                if a.muerto():
+                    "Se murió"
 
 
 
